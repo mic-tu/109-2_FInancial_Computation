@@ -10,16 +10,15 @@ S_t = 50
 K = 50
 r = 0.1
 q = 0.05
-sigma = 0.4
+sigma = 0.2
 t = 0.25
-T_minus_t = 0.25
+T_minus_t = 0.25  # T = 0.5
 M = 100
 n = 100
-S_ave_t = 50
+S_ave_t = 60
 Sim_n = 10000
 Rep_n = 20
 
-'''
 print("Basic Requirement")
 t1 = time.time()
 monte_carlo_mean, monte_carlo_std = Monte_Carlo_Simulation(S_t, K, r, q, sigma, t, T_minus_t, n, S_ave_t,  Sim_n, Rep_n)
@@ -36,6 +35,7 @@ print("European Call: {}".format(round(eur_binomial, 4)))
 print("American Call: {}".format(round(ame_binomial, 4)))
 print("-" * 40)
 
+print("Bonus 2")
 # Bonus 2 Binary
 t5 = time.time()
 eur_binary, ame_binary = Binomial_Tree_Binary(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)
@@ -81,3 +81,4 @@ comparion = pd.DataFrame(result).T
 comparion.index = ["European(linearly)", "European(logarithmically)", "American(linearly)", "American(logarithmically)"]
 comparion.columns = ["M = {}".format(M) for M in Ms]
 print(comparion)
+'''

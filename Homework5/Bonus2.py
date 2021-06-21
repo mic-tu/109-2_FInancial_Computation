@@ -143,12 +143,12 @@ if __name__ == '__main__':
     K = 50
     r = 0.1
     q = 0.05
-    sigma = 0.4
+    sigma = 0.2
     t = 0.25
     T_minus_t = 0.25
     M = 100
     n = 100
-    S_ave_t = 50
+    S_ave_t = 60
     Sim_n = 10000
     Rep_n = 20
     result = Binomial_Tree_Binary(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)

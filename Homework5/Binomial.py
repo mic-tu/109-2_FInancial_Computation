@@ -83,8 +83,8 @@ if __name__ == '__main__':
     sigma = 0.8
     t = 0.25
     T_minus_t = 0.75
-    M = 10
-    n = 5
+    M = 100
+    n = 100
     S_ave_t = 50
     result = Binomial_Tree(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)
     print(result)

@@ -59,18 +59,39 @@ def Binomial_Tree_Bonus1(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t):
     return eur_C[0][0][0], ame_C[0][0][0]
 
 if __name__ == '__main__':
+    import time
+    import pandas as pd
+    from Bonus2 import Binomial_Tree_Interpolation
+
     S_t = 50
     K = 50
     r = 0.1
     q = 0.05
-    sigma = 0.4
+    sigma = 0.8
     t = 0.25
-    T_minus_t = 0.25
-    M = 100
+    T_minus_t = 0.25  # T = 0.5
+    Ms = [50]
     n = 100
     S_ave_t = 50
-    Sim_n = 10000
-    Rep_n = 20
-    result = Binomial_Tree_Bonus1(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)
-    print(result)
+    
+    # Bonus 1
+    print("Bonus 1")
+    result = []
+    for M in Ms:
+        t9 = time.time()
+        linearly_eur = round(Binomial_Tree_Interpolation(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)[0], 4)
+        linearly_ame = round(Binomial_Tree_Interpolation(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)[1], 4)
+        t10 = time.time()
+        print("Finish linearly         M = {}, Spend Time: {}".format(M, round(t10 - t9, 6)))
+        logarithmically_eur = round(Binomial_Tree_Bonus1(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)[0], 4)
+        logarithmically_ame = round(Binomial_Tree_Bonus1(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)[1], 4)
+        t11 = time.time()
+        print("Finish logarithmically  M = {}, Spend Time: {}".format(M, round(t11 - t10, 6)))
+        result.append([linearly_eur, logarithmically_eur, linearly_ame, logarithmically_ame])
+
+    # 印出結果
+    comparion = pd.DataFrame(result).T
+    comparion.index = ["European(linearly)", "European(logarithmically)", "American(linearly)", "American(logarithmically)"]
+    comparion.columns = ["M = {}".format(M) for M in Ms]
+    print(comparion)
 

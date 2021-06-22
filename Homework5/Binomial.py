@@ -76,16 +76,30 @@ def Binomial_Tree(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t):
 
 
 if __name__ == '__main__':
+    import time
+
     S_t = 50
     K = 50
     r = 0.1
     q = 0.05
     sigma = 0.8
-    t = 0.25
-    T_minus_t = 0.75
+    T_minus_t = 0.25  # T = 0.5
     M = 100
     n = 100
     S_ave_t = 50
-    result = Binomial_Tree(S_t, K, r, q, sigma, t, T_minus_t, M, n, S_ave_t)
-    print(result)
+    
+    t1 = time.time()
+    eur_binomial, ame_binomial = Binomial_Tree(S_t, K, r, q, sigma, 0, T_minus_t, M, n, S_ave_t)
+    t2 = time.time()
+    print("1. t = 0      Spend Time = {:.6f}".format(t2 - t1))
+    print("European Call: {:.4f}".format(eur_binomial))
+    print("American Call: {:.4f}".format(ame_binomial))
+    print("-" * 40)
+
+    t3 = time.time()
+    eur_binomial, ame_binomial = Binomial_Tree(S_t, K, r, q, sigma, 0.25, T_minus_t, M, n, S_ave_t)
+    t4 = time.time()
+    print("2. t = 0.25   Spend Time = {:.6f}".format(t4 - t3))
+    print("European Call: {:.4f}".format(eur_binomial))
+    print("American Call: {:.4f}".format(ame_binomial))
 
